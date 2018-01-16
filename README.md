@@ -1,44 +1,19 @@
 ## GDAX Notifier
 
-This app polls GDAX and hits a webhook whenever an order has been filled. I currently use IFTTT Maker to send iOS push notifications.
+This app polls GDAX and send Telegram message via bot.
 
-![Notification Screenshot](/images/notification.jpg?raw=true "What iOS Notifications Look Like")
 
-# Create Maker Webhook
-
-Create an IFTTT account and set up a new maker webhook https://ifttt.com/maker_webhooks and set it up to point at something (like app notifications):
-
-![IFTTT Screenshot](/images/ifttt.png?raw=true "What IFTTT Looks Like")
-
-Set the notification equal to:
-
-```
-GDAX {{Value1}} {{Value2}}: {{Value3}}
-```
-
-# Build
-
-```
-docker build -t gdax-notifier .
-```
-
-# Run
-
-Create a .env file with:
+Create a environment.rb file with:
 
 ```
 # required
 GDAX_API_KEY=
 GDAX_API_SECRET=
 GDAX_API_PASS=
-MAKER_EVENT=
-MAKER_KEY=
+TELEGRAM_TOKEN=
 ```
 
 ```
-# background
-docker run -it -d --restart always --name gdax-notifier --env-file .env gdax-notifier
-
-# foreground
-docker run -it --rm --name gdax-notifier --env-file .env gdax-notifier
+# run
+ruby run.rb
 ```
